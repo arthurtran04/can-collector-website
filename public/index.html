@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thùng Rác Thông Minh</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Màn hình đăng nhập/đăng ký -->
+        <div id="auth-screen" class="auth-container">
+            <div class="auth-box">
+                <h1>🔄 Thùng Rác Thông Minh</h1>
+                <p class="subtitle">Giải pháp IoT thu gom lon nhôm</p>
+                
+                <!-- Form đăng nhập -->
+                <div id="login-form" class="form-container">
+                    <h2>Đăng nhập</h2>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <input type="text" id="loginUsername" placeholder="Tên đăng nhập" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="loginPassword" placeholder="Mật khẩu" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                    </form>
+                    <p class="switch-text">Chưa có tài khoản? <a href="#" id="showRegister">Đăng ký ngay</a></p>
+                </div>
+
+                <!-- Form đăng ký -->
+                <div id="register-form" class="form-container hidden">
+                    <h2>Đăng ký</h2>
+                    <form id="registerForm">
+                        <div class="form-group">
+                            <input type="text" id="registerUsername" placeholder="Tên đăng nhập" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="registerPassword" placeholder="Mật khẩu" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="confirmPassword" placeholder="Xác nhận mật khẩu" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Đăng ký</button>
+                    </form>
+                    <p class="switch-text">Đã có tài khoản? <a href="#" id="showLogin">Đăng nhập</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Màn hình dashboard -->
+        <div id="dashboard" class="dashboard-container hidden">
+            <header class="dashboard-header">
+                <h1>🔄 Thùng Rác Thông Minh</h1>
+                <div class="user-info">
+                    <span id="username-display"></span>
+                    <button id="logout-btn" class="btn btn-secondary">Đăng xuất</button>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <!-- Thông tin người dùng -->
+                <div class="user-stats">
+                    <div class="stat-card">
+                        <h3>📦 Lon đã thu gom</h3>
+                        <p id="total-cans">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>⭐ Điểm tích lũy</h3>
+                        <p id="total-points">0</p>
+                    </div>
+                </div>
+
+                <!-- Nút điều khiển -->
+                <div class="control-panel">
+                    <button id="start-collection-btn" class="btn btn-success btn-large">
+                        🚀 Bắt đầu thu gom
+                    </button>
+                    <button id="end-collection-btn" class="btn btn-danger btn-large hidden">
+                        ⏹️ Kết thúc
+                    </button>
+                </div>
+
+                <!-- Thông báo trạng thái -->
+                <div id="status-message" class="status-message"></div>
+
+                <!-- Kết quả thu gom -->
+                <div id="collection-result" class="collection-result hidden">
+                    <h3>📊 Kết quả thu gom</h3>
+                    <div class="result-stats">
+                        <p>Lon đã thu gom: <span id="session-cans">0</span></p>
+                        <p>Điểm nhận được: <span id="session-points">0</span></p>
+                    </div>
+                    <button id="confirm-btn" class="btn btn-primary">✅ Xác nhận</button>
+                </div>
+
+                <!-- Voucher section -->
+                <div class="voucher-section">
+                    <h3>🎫 Đổi điểm lấy voucher</h3>
+                    <div class="voucher-options">
+                        <div class="voucher-card">
+                            <h4>Voucher 10k VND</h4>
+                            <p>Cần: 40 điểm</p>
+                            <button id="redeem-10k" class="btn btn-outline">Đổi voucher</button>
+                        </div>
+                        <div class="voucher-card">
+                            <h4>Voucher 25k VND</h4>
+                            <p>Cần: 80 điểm</p>
+                            <button id="redeem-25k" class="btn btn-outline">Đổi voucher</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Danh sách voucher -->
+                <div class="voucher-list">
+                    <h3>🎫 Voucher của bạn</h3>
+                    <div id="user-vouchers" class="voucher-items">
+                        <p class="no-vouchers">Chưa có voucher nào</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
