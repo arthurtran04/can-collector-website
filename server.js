@@ -11,8 +11,8 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://thung-rac-thong-minh.vercel.app', 'https://www.thung-rac-thong-minh.vercel.app']
+  origin: process.env.NODE_ENV === 'production'
+    ? ['https://thung-rac-thong-minh.vercel.app', 'https://can-collector-website.vercel.app']
     : 'http://localhost:3000',
   credentials: true
 }));
