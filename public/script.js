@@ -14,7 +14,7 @@ const showRegisterLink = document.getElementById('showRegister');
 const showLoginLink = document.getElementById('showLogin');
 
 // API Base URL
-const API_BASE = '';
+const API_BASE = 'https://can-collector-website.vercel.app/';
 
 // Utility Functions
 function showMessage(message, type = 'info') {
