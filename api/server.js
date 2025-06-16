@@ -72,26 +72,34 @@ app.get('/', (req, res) => {
 // Đăng ký
 app.post('/api/register', async (req, res) => {
     try {
+        console.log('Bắt đầu quá trình đăng ký');
         const { username, password } = req.body;
-        
+
         // Kiểm tra người dùng đã tồn tại
+        console.log('Kiểm tra người dùng đã tồn tại...');
         const existingUser = await User.findOne({ username });
         if (existingUser) {
+            console.log('Tên đăng nhập đã tồn tại');
             return res.status(400).json({ message: 'Tên đăng nhập đã tồn tại' });
         }
 
         // Mã hóa mật khẩu
+        console.log('Mã hóa mật khẩu...');
         const hashedPassword = await bcrypt.hash(password, 10);
-        
+
         // Tạo người dùng mới
+        console.log('Tạo người dùng mới...');
         const user = new User({
             username,
             password: hashedPassword
         });
-        
+
+        console.log('Lưu người dùng vào cơ sở dữ liệu...');
         await user.save();
+        console.log('Đăng ký thành công');
         res.status(201).json({ message: 'Đăng ký thành công' });
     } catch (error) {
+        console.error('Lỗi trong quá trình đăng ký:', error);
         res.status(500).json({ message: 'Lỗi server' });
     }
 });
