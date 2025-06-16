@@ -4,7 +4,9 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const path = require('path');
-require('dotenv').config();
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,16 +21,27 @@ app.use(cors({
 app.use(express.json());
 app.use(express.static('public'));
 
-// Kết nối MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/thung-rac-thong-minh', {
+// Thêm validation cho MONGODB_URI
+const MONGODB_URI = process.env.MONGODB_URI;
+
+if (!MONGODB_URI) {
+    console.error('MONGODB_URI environment variable is not defined');
+    throw new Error('MONGODB_URI must be defined');
+}
+
+console.log('Connecting to MongoDB...');
+console.log('Environment:', process.env.NODE_ENV);
+console.log('MONGODB_URI exists:', !!MONGODB_URI);
+
+// Kết nối MongoDB với error handling tốt hơn
+mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-});
-
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'Lỗi kết nối MongoDB:'));
-db.once('open', () => {
-    console.log('Đã kết nối thành công với MongoDB');
+}).then(() => {
+    console.log('MongoDB connected successfully');
+}).catch((error) => {
+    console.error('MongoDB connection error:', error);
+    throw error;
 });
 
 // Schema người dùng
