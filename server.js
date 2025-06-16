@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors({
   origin: process.env.NODE_ENV === 'production'
-    ? ['https://thung-rac-thong-minh.vercel.app', 'https://can-collector-website.vercel.app']
+    ? 'https://can-collector-website.vercel.app'
     : 'http://localhost:3000',
   credentials: true
 }));
@@ -261,12 +261,5 @@ app.post('/api/redeem-voucher', authenticateToken, async (req, res) => {
         res.status(500).json({ message: 'Lỗi server' });
     }
 });
-
-// Thay đổi cách khởi động server
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(PORT, () => {
-    console.log(`Server đang chạy tại http://localhost:${PORT}`);
-  });
-}
 
 module.exports = app; 
