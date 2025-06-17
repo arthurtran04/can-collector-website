@@ -21,26 +21,26 @@ app.use(cors({
 app.use(express.json());
 app.use(express.static('public'));
 
-// Thêm validation cho MONGODB_URI
+// Validation cho MONGODB_URI
 const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {
-    console.error('MONGODB_URI environment variable is not defined');
-    throw new Error('MONGODB_URI must be defined');
+    console.error('Biến môi trường MONGODB_URI không được định nghĩa');
+    throw new Error('MONGODB_URI phải được định nghĩa');
 }
 
-console.log('Connecting to MongoDB...');
-console.log('Environment:', process.env.NODE_ENV);
-console.log('MONGODB_URI exists:', !!MONGODB_URI);
+console.log('Đang kết nối MongoDB...');
+console.log('Môi trường:', process.env.NODE_ENV);
+console.log('MONGODB_URI có tồn tại:', !!MONGODB_URI);
 
-// Kết nối MongoDB với error handling tốt hơn
+// Kết nối MongoDB với error handling
 mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
-    console.log('MongoDB connected successfully');
+    console.log('Kết nối MongoDB thành công');
 }).catch((error) => {
-    console.error('MongoDB connection error:', error);
+    console.error('Lỗi kết nối MongoDB:', error);
     throw error;
 });
 
